@@ -12,6 +12,7 @@ If error https://stackoverflow.com/questions/78384724/react-native-error-java-io
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 ![alt text](image.png)
+(!) Cmd only, not powershell
 
 ## What is JSX?
 ```jsx
@@ -30,3 +31,9 @@ function App() {
   );
 }
 ```
+
+## Hello World App
+```npx react-native init HWAPP```
+```cd HWAPP && npx react-native run-android```
+![alt text](image-3.png)
+SafeAreaView ensures that the content is displayed within the safe area boundaries of a device. 
