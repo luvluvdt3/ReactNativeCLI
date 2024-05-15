@@ -37,3 +37,14 @@ function App() {
 ```cd HWAPP && npx react-native run-android```
 ![alt text](image-3.png)
 SafeAreaView ensures that the content is displayed within the safe area boundaries of a device. 
+
+## React Hooks
+- useState: same old `var1,setVar1 = useState(initVal)`
+Some new stuff that i havent noticed before
+- If useEffect on a variable var1:
+  - If setVar1(newVal) is called, but newVal == var1, then useEffect will not be called 
+  - At init, useEffect will be called too since var1 is initialized, which makes sense that [] is called at init even with empty dependency
+
+- Does have useRef like Vue.js too
+
+- useContext omgg like a globally accessible variable without passing props to 999 child of child of child components 
