@@ -156,5 +156,55 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 ## Project SocialMedia
 ```npx react-native init SocialMedia```
-```cd .\SocialMedia && npx react-native run-android```
+```cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\SocialMedia" && npx react-native run-android```
 (!) Remember to change gradle to gradle-8.5
+
+- Download fonts https://github.com/nvacheishvili/SocialMedia/compare/installing-custom-fonts?expand=1
+  - Download it
+    https://fonts.google.com/specimen/Inter?query=inter ![alt text](image-4.png)
+  - Install
+    ![alt text](image-5.png)
+  - Create react-native.config.js
+    ```jsx
+    module.exports = {
+      project: {
+        ios: {},
+        android: {},
+      },
+      assets: ['./assets/fonts'],
+    };
+    ```
+  - Copy/paste fonts in new folder `assets/fonts` ![alt text](image-6.png)
+  - Run `npx react-native-asset` to link the fonts thanks to react-native.config.js ![alt text](image-7.png)
+    -> Will see the copies of fonts in `android/app/src/main/assets/fonts` and `ios/SocialMedia/Info.plist`
+  - Re-run the app ```cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\SocialMedia" && npx react-native run-android```
+  - Now can use it
+  ```jsx
+      <Text style={{fontSize: 50, fontFamily: getFontFamily('Inter-ExtraBold')}}>
+        Hello World!
+      </Text>
+  ``` 
+  ![alt text](image-8.png)
+  - Or use a helper to replace font name (Inter-ExtraBold, Inter-Bold, Inter-Regular, Inter-Light,...) with numbers that will take care of default cases between ios and android to always choose Regular font as default
+  ```jsx
+  export const getFontFamily = (baseFont = 'Inter', weight) => {
+    switch (weight) {
+      case '100':
+        return `${baseFont}-Thin`;
+      case '200':
+        return `${baseFont}-ExtraLight`;
+      case '300':
+        return `${baseFont}-Light`;
+        ...
+      default:
+        return `${baseFont}-Regular`;
+    }
+  };
+  ```
+  ```jsx
+  import {getFontFamily} from './assets/fonts/helper';
+      <Text style={{fontSize: 50, fontFamily: getFontFamily('Inter', '800')}}>
+        Hello World!
+      </Text>
+  ```
+    
