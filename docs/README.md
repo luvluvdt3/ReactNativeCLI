@@ -156,3 +156,5 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 ## Project SocialMedia
 ```npx react-native init SocialMedia```
+```cd .\SocialMedia && npx react-native run-android```
+(!) Remember to change gradle to gradle-8.5
