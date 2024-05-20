@@ -153,3 +153,6 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons';
         style={{color: 'white'}}
       />
 ```
+
+## Project SocialMedia
+```npx react-native init SocialMedia```
