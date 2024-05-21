@@ -2,11 +2,23 @@
 ## Tutorial
 https://www.udemy.com/course/react-native-mobile-app-development/
 
+## Common errors
+(!) Cmd only, not powershell
+
+If error https://stackoverflow.com/questions/78384724/react-native-error-java-io-uncheckedioexception-could-not-move-temporary-work -> use gradle 8.5 instead of 8.6 in `AwesomeProject\android\gradle\wrapper\gradle-wrapper.properties`
+
+If syntax error in .js "Parsing error: No Babel config file detected for", in .eslintrc.js, add
+```jsx
+  plugins: [
+    "babel", // fix error "Parsing error: Unexpected token"
+    "html",
+  ]
+``` 
+
 ## Setup
 https://www.youtube.com/watch?v=gH3l2DSlXDE
 https://reactnative.dev/docs/environment-setup
 
-If error https://stackoverflow.com/questions/78384724/react-native-error-java-io-uncheckedioexception-could-not-move-temporary-work -> use gradle 8.5 instead of 8.6 in `AwesomeProject\android\gradle\wrapper\gradle-wrapper.properties`
 
 ## First Launch
 ![alt text](image-1.png)
@@ -159,7 +171,7 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons';
 ```cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\SocialMedia" && npx react-native run-android```
 (!) Remember to change gradle to gradle-8.5
 
-- Download fonts https://github.com/nvacheishvili/SocialMedia/compare/installing-custom-fonts?expand=1
+#### Download fonts https://github.com/nvacheishvili/SocialMedia/compare/installing-custom-fonts?expand=1
   - Download it
     https://fonts.google.com/specimen/Inter?query=inter ![alt text](image-4.png)
   - Install
@@ -207,4 +219,46 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons';
         Hello World!
       </Text>
   ```
-    
+#### Create Title Component
+- Create folder `/components/Title/` with `Title.js` and `styles.js`
+- Install PropsTypes `npm i prop-types --save` to check the type of props passed to the component
+```jsx
+  const Title = props => {
+    return <Text style={style.title}>{props.title}</Text>;
+  };
+  Title.propTypes = {
+    title: PropTypes.string.isRequired,
+  };
+```
+```jsx
+const style = StyleSheet.create({
+  title: {
+    color: '#022150',
+    fontFamily: getFontFamily('Inter', '600'),
+    fontSize: 24,
+  },
+});
+```
+- In `App.js`
+```jsx
+  <Title title={'Let’s Explore'} />
+```
+
+#### Install FontAwesome
+https://docs.fontawesome.com/web/use-with/react-native
+```
+npm i --save @fortawesome/react-native-fontawesome @fortawesome/fontawesome-svg-core react-native-svg
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-brands-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+```
+(!) Remember to restart the app after installing FontAwesome
+```jsx
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+  <FontAwesomeIcon icon={faEnvelope} size={20} color={'#898DAE'} />
+```
+![alt text](image-9.png)
+
+- Color picker not showing in .js: https://stackoverflow.com/questions/71472632/styled-components-color-picker-not-showing 
+
