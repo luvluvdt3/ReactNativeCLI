@@ -10,7 +10,9 @@ const UserProfileImage = props => {
       style={[style.userImageContainer, {borderRadius: props.imageDimensions}]}>
       <Image
         source={props.profileImage}
-        style={{width: props.imageDimensions, height: props.imageDimensions}}
+        style={{width: props.imageDimensions, 
+          height: props.imageDimensions,
+          borderRadius: props.imageDimensions/2,}}
       />
     </View>
   );

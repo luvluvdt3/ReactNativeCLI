@@ -261,4 +261,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 ![alt text](image-9.png)
 
 - Color picker not showing in .js: https://stackoverflow.com/questions/71472632/styled-components-color-picker-not-showing 
+ #### Done SocialMedia
+![alt text](image-10.png)
 
