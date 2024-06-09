@@ -264,3 +264,29 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
  #### Done SocialMedia
 ![alt text](image-10.png)
 
+## Responsive UI
+#### Dimensions
+```jsx
+import {Dimensions} from 'react-native';
+
+const [screenData, setScreenData] = useState(Dimensions.get('screen'));
+
+console.log(screenData);
+Dimensions.addEventListener('change', result => {
+  setScreenData(result.screen);
+});
+return(
+  <SafeAreaView>
+    <View
+    style={{
+      backgroundColor: 'red',
+      width: screenData.width / 2,
+      height: screenData.height / 2,
+    }}>
+    <Text style={{fontSize: screenData.height / 20}}>
+      This box will have half of the screens width and height
+    </Text>
+  </View>
+  </SafeAreaView>
+)
+```
