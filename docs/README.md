@@ -290,3 +290,72 @@ return(
   </SafeAreaView>
 )
 ```
+#### Scaling
+Use `Dimensions` to get the screen width and height, then use it to scale the components -> responsive UI
+```jsx
+import {Dimensions} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+
+const {width, height} = Dimensions.get('window');
+const isSmall = width <= 375 && !DeviceInfo.hasNotch();
+
+const guidelineBaseWidth = () => {
+  if (isSmall) {
+    return 330;
+  }
+  return 350;
+};
+
+const horizontalScale = size => (width / guidelineBaseWidth()) * size;
+
+const guidelineBaseHeight = () => {
+  if (isSmall) {
+    return 550;
+  } else if (width > 410) {
+    return 620;
+  }
+  return 680;
+};
+
+const verticalScale = size => (height / guidelineBaseHeight()) * size;
+
+const guidelineBaseFonts = () => {
+  if (width > 410) {
+    return 430;
+  }
+  return 400;
+};
+const scaleFontSize = size => Math.round((width / guidelineBaseFonts()) * size);
+export {horizontalScale, verticalScale, scaleFontSize};
+```
+#### Platform Specific Code (Android/iOS)
+```jsx
+import {Platform, Switch} from 'react-native';
+  const [isOn, setIsOn] = useState(false);
+  console.log(Platform); // {"OS": "android", "Version": 34, "__constants": {"Brand": "google", "Fingerprint": "google/sdk_gphone64_...}
+  <View
+    style={{
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    }}>
+    <Switch
+      value={isOn}
+      style={
+        Platform.OS === 'android' && {
+          transform: [{scaleX: 1.5}, {scaleY: 1.5}],
+        }
+      }
+      ios_backgroundColor={'#000'} // Only for iOS, since we cant change the trackColor
+      trackColor={
+        Platform.OS === 'android' && {
+          false: 'grey',
+          true: 'red',
+        }
+      }
+      onValueChange={value => setIsOn(value)}
+    />
+  </View>
+```
+=> Android: Switch is bigger, trackColor is red, iOS: Switch is smaller, trackColor is grey
+![alt text](image-11.png) ![alt text](image-12.png)
