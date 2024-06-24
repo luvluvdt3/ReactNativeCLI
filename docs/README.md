@@ -359,3 +359,20 @@ import {Platform, Switch} from 'react-native';
 ```
 => Android: Switch is bigger, trackColor is red, iOS: Switch is smaller, trackColor is grey
 ![alt text](image-11.png) ![alt text](image-12.png)
+#### Status Bar of Android/iOS
+```jsx
+import {StatusBar} from 'react-native';
+   <StatusBar backgroundColor={'#8510eb'} barStyle={'light-content'} /> 
+      {/* Also dark-content, default */}
+      {/* Background color will not work on IOS, since its transparent by default */}
+```
+- Android:
+  - light-content: 
+    ![alt text](image-13.png)
+  - dark-content:
+    ![alt text](image-14.png)
+- iOS:
+  - light-content: (lol not reccomended)
+    ![alt text](image-15.png)
+  - dark-content: (same as default)
+    ![alt text](image-16.png)

@@ -5,6 +5,7 @@ import {
   View,
   Text,
   FlatList,
+  StatusBar,
 } from 'react-native';
 import Title from './components/Title/Title';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -152,6 +153,9 @@ const App = () => {
 
   return (
     <SafeAreaView>
+      <StatusBar backgroundColor={'#8510eb'} barStyle={'dark-content'} /> 
+      {/* Also dark-content, default */}
+      {/* Background will not work on IOS, since its transparent by default */}
       <View>
         <FlatList
           ListHeaderComponent={
