@@ -292,6 +292,9 @@ return(
 ```
 #### Scaling
 Use `Dimensions` to get the screen width and height, then use it to scale the components -> responsive UI
+```
+npm install --save react-native-device-info
+```
 ```jsx
 import {Dimensions} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -376,3 +379,32 @@ import {StatusBar} from 'react-native';
     ![alt text](image-15.png)
   - dark-content: (same as default)
     ![alt text](image-16.png)
+
+## Basic Navigation
+### Install
+  - https://reactnavigation.org/docs/getting-started
+    ```
+    npm install @react-navigation/native
+    npm install react-native-screens react-native-safe-area-context
+    ```
+  - In android/app/src/main/java/<your package name>/MainActivity.kt
+    ```kotlin
+    import android.os.Bundle;
+    ...
+    override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(null)
+    }
+    ```
+  - Wrap the App in NavigationContainer
+    ```jsx
+    import {NavigationContainer} from '@react-navigation/native';
+    <NavigationContainer>
+      <SafeAreaView>
+        ...
+      </SafeAreaView>
+    </NavigationContainer>
+    ```
+  - (!) If error ```A problem occurred configuring project ':react-native-screens'. > [CXX1101] NDK at C:\Users\luvluvdt3\AppData\Local\Android\Sdk\ndk\26.1.10909125 did not have a source.properties file *```
+    --> Install the missing ndkVersion ![alt text](image-18.png) 
+    - ![alt text](image-17.png)
+    - ![alt text](image-19.png)
