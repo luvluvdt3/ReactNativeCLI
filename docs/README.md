@@ -404,7 +404,57 @@ import {StatusBar} from 'react-native';
       </SafeAreaView>
     </NavigationContainer>
     ```
-  - (!) If error ```A problem occurred configuring project ':react-native-screens'. > [CXX1101] NDK at C:\Users\luvluvdt3\AppData\Local\Android\Sdk\ndk\26.1.10909125 did not have a source.properties file *```
+  - (!) If error ```A problem occurred configuring project ':react-native-screens'. > [CXX1101] NDK at C:\Users\luvluvdt3\AppData\Local\Android\Sdk\ndk\26.1.10909125 did not have a source.properties file *``` 
+  - https://stackoverflow.com/questions/78391354/react-native-a-problem-occurred-configuring-project-react-native-screens
     --> Install the missing ndkVersion ![alt text](image-18.png) 
     - ![alt text](image-17.png)
     - ![alt text](image-19.png)
+  
+### Stack Navigator
+#### Install
+- https://reactnavigation.org/docs/stack-navigator
+  ```
+  npm install @react-navigation/stack
+  npm install react-native-gesture-handler
+  npm install @react-native-masked-view/masked-view
+  ```
+- Add to index.js
+  ```jsx
+  import 'react-native-gesture-handler';
+  ```
+```jsx
+export const Routes = {
+    Home: 'Home',
+  };
+```
+```jsx
+import {createStackNavigator} from '@react-navigation/stack';
+import {Routes} from './Routes';
+import Home from '../screens/Home/Home';
+
+const Stack = createStackNavigator();
+
+const MainNavigation = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{header: () => null, headerShown: false}} //have to put this or else the ugly 'Home' header will show up
+      initialRouteName={Routes.Home}> //this is the first screen that will show up
+      <Stack.Screen name={Routes.Home} component={Home} />
+    </Stack.Navigator>
+  );
+};
+
+export default MainNavigation;
+```
+```jsx
+import MainNavigation from './navigation/MainNavigation';
+const App = () => {
+  return (
+    <NavigationContainer>
+      <MainNavigation />
+    </NavigationContainer>
+  );
+};
+
+export default App;
+```
