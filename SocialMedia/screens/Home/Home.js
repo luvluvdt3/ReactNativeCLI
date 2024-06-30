@@ -15,7 +15,8 @@ import style from './style';
 import UserStory from '../../components/UserStory/UserStory';
 import UserPost from '../../components/UserPost/UserPost';
 import {scaleFontSize} from '../../assets/styles/scaling';
-const App = () => {
+import {Routes} from '../../navigation/Routes';
+const Home = ({navigation}) => {
   const userStories = [
     {
       firstName: 'Joseph',
@@ -162,7 +163,11 @@ const App = () => {
             <>
               <View style={style.header}>
                 <Title title={'Let’s Explore'} />
-                <TouchableOpacity style={style.messageIcon}>
+                <TouchableOpacity
+                  style={style.messageIcon}
+                  onPress={() => {
+                    navigation.navigate(Routes.Profile);
+                  }}>
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     size={scaleFontSize(20)}
@@ -252,4 +257,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;

@@ -3,17 +3,19 @@
 https://www.udemy.com/course/react-native-mobile-app-development/
 
 ## Common errors
-(!) Cmd only, not powershell
+<div style="color: orange;">⚠️Cmd only, not powershell</div>
 
-If error https://stackoverflow.com/questions/78384724/react-native-error-java-io-uncheckedioexception-could-not-move-temporary-work -> use gradle 8.5 instead of 8.6 in `AwesomeProject\android\gradle\wrapper\gradle-wrapper.properties`
+<div style="color: orange; ">⚠️If error https://stackoverflow.com/questions/78384724/react-native-error-java-io-uncheckedioexception-could-not-move-temporary-work -> use gradle 8.5 instead of 8.6 in <i>AwesomeProject\android\gradle\wrapper\gradle-wrapper.properties</i> </div>
 
-If syntax error in .js "Parsing error: No Babel config file detected for", in .eslintrc.js, add
+<div style="color: orange; ">⚠️If syntax error in .js "Parsing error: No Babel config file detected for", in .eslintrc.js, add: </div>
+
 ```jsx
   plugins: [
     "babel", // fix error "Parsing error: Unexpected token"
     "html",
   ]
 ``` 
+
 
 ## Setup
 https://www.youtube.com/watch?v=gH3l2DSlXDE
@@ -404,11 +406,10 @@ import {StatusBar} from 'react-native';
       </SafeAreaView>
     </NavigationContainer>
     ```
-  - (!) If error ```A problem occurred configuring project ':react-native-screens'. > [CXX1101] NDK at C:\Users\luvluvdt3\AppData\Local\Android\Sdk\ndk\26.1.10909125 did not have a source.properties file *``` 
-  - https://stackoverflow.com/questions/78391354/react-native-a-problem-occurred-configuring-project-react-native-screens
-    --> Install the missing ndkVersion ![alt text](image-18.png) 
-    - ![alt text](image-17.png)
-    - ![alt text](image-19.png)
+  - <div style="color: orange;">⚠️ If error <i>A problem occurred configuring project ':react-native-screens'. > [CXX1101] NDK at C:\Users\luvluvdt3\AppData\Local\Android\Sdk\ndk\26.1.10909125 did not have a source.properties file </i> https://stackoverflow.com/questions/78391354/react-native-a-problem-occurred-configuring-project-react-native-screens
+    --> Install the missing ndkVersion ![alt text](image-18.png) </div>
+  ![alt text](image-17.png)
+  ![alt text](image-19.png)
   
 ### Stack Navigator
 #### Install
@@ -458,3 +459,23 @@ const App = () => {
 
 export default App;
 ```
+```jsx
+import {Routes} from '../../navigation/Routes';
+const Home = ({navigation}) => {
+  ...
+                  <TouchableOpacity
+                  style={style.messageIcon}
+                  onPress={() => {
+                    navigation.navigate(Routes.Profile);
+                  }}>
+```
+*=> On press the message icon, navigate to Profile screen*
+```jsx
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={{color: 'blue'}}>Go Back</Text>
+      </TouchableOpacity>
+```
+![alt text](image-20.png)
+*=> On press the 'Go Back' text, navigate back to the previous screen*
+
+<div style="color: orange;">⚠️If error, make sure that Routes are well imported. Aka copy-paste sometimes doesnt count, gotta type it out and choose from the suggestion example <i style="color: red;">Routes.Profile</i> </div>
