@@ -423,6 +423,7 @@ import {StatusBar} from 'react-native';
   ```jsx
   import 'react-native-gesture-handler';
   ```
+#### Usage
 ```jsx
 export const Routes = {
     Home: 'Home',
@@ -479,3 +480,44 @@ const Home = ({navigation}) => {
 *=> On press the 'Go Back' text, navigate back to the previous screen*
 
 <div style="color: orange;">⚠️If error, make sure that Routes are well imported. Aka copy-paste sometimes doesnt count, gotta type it out and choose from the suggestion example <i style="color: red;">Routes.Profile</i> </div>
+
+### Drawer Navigator
+#### Install
+- https://reactnavigation.org/docs/drawer-navigator
+  ```
+  npm install @react-navigation/drawer
+  npm install react-native-gesture-handler react-native-reanimated
+  ```
+- In `babel.config.js`
+  ```jsx
+    plugins: ['react-native-reanimated/plugin'],
+  ```
+
+#### Usage
+```jsx
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const MainMenuNavigation = () => {
+  return (
+    <Drawer.Navigator screenOptions={{header: () => null, headerShown: false}}>
+      <Drawer.Screen name={Routes.Home} component={Home} />
+      <Drawer.Screen name={Routes.Profile} component={Profile} />
+    </Drawer.Navigator>
+  );
+};
+
+const MainNavigation = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{header: () => null, headerShown: false}}
+      initialRouteName={Routes.Home}>
+      <Stack.Screen name={'Drawer'} component={MainMenuNavigation} />
+    </Stack.Navigator>
+  );
+};
+```
+*=> Now the Home and Profile screens are in the Drawer Navigator when we slide from the left. (!) Can have the menu button if not using the screenOptions={{header: () => null, headerShown: false}}*
+![alt text](image-21.png)
