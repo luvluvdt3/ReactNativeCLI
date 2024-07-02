@@ -582,3 +582,84 @@ export const ProfileTabsNavigation = () => {
 
 ![alt text](image-23.png)
 
+#### Styling the Tab Navigator
+```jsx
+import React from 'react';
+import {Text} from 'react-native';
+
+import PropTypes from 'prop-types';
+import style from './style';
+const ProfileTabTitle = props => {
+  return (
+    <Text style={[style.title, !props.isFocused && style.titleNotFocused]}>
+      {props.title}
+    </Text>
+  );
+};
+
+ProfileTabTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  isFocused: PropTypes.bool.isRequired,
+};
+
+export default ProfileTabTitle;
+```
+*=> Of course create the style.js file to make it biutiful*
+```jsx
+const style = StyleSheet.create({
+  title: {
+    color: '#022150',
+    fontFamily: getFontFamily('Inter', '500'),
+    fontSize: scaleFontSize(16), //will apply automatically on not focused too
+    padding: horizontalScale(15),
+  },
+  titleNotFocused: {
+    color: '#79869F',
+    fontFamily: getFontFamily('Inter', '500'), //cant use 400 or anything smaller since there will be missing last letter onFocus. I assume its some hidden styling of Tab Navigator causing it. 
+    fontStyle: 'normal',
+  },
+});
+```
+<div style="color: orange;">⚠️Personal experience: Avoid using different font size on/off focus, it will cause the last letter to be cut off. Instead, use different color, font style, or padding</div>
+```jsx
+        tabBarLabel: ({focused}) => (
+          <ProfileTabTitle isFocused={focused} title={'Photos'} />
+        ),
+```jsx
+import ProfileTabTitle from '../components/ProfileTabTitle/ProfileTabTitle';
+
+const ProfileTabs = createMaterialTopTabNavigator();
+...
+const Tab1 = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is tab 1</Text>
+    </View>
+  );
+};
+  return (
+    <ProfileTabs.Navigator
+      screenOptions={{
+        tabBarIndicatorStyle: {
+          backgroundColor: 'transparent',
+        },
+        tabBarStyle: {
+          zIndex: 0,
+          elevation: 0,
+        },
+      }}>
+      <ProfileTabs.Screen
+        name={'Tab1'}
+        options={{
+          tabBarLabel: ({focused}) => (
+            <ProfileTabTitle isFocused={focused} title={'Photos'} />
+          ),
+        }}
+        component={Tab1}
+      />
+      ...
+    </ProfileTabs.Navigator>
+  );
+```
+*=> Thats how we can style the tab navigator with custom title and indicator. Animation with this is 🤌🤌🤌* 
+![alt text](image-24.png)
