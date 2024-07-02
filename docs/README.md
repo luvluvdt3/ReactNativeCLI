@@ -521,3 +521,64 @@ const MainNavigation = () => {
 ```
 *=> Now the Home and Profile screens are in the Drawer Navigator when we slide from the left. (!) Can have the menu button if not using the screenOptions={{header: () => null, headerShown: false}}*
 ![alt text](image-21.png)
+<div style="color: orange;">⚠️If cant slide out the drawer and keep trigger the quitting of the app, try to slide from the veryyyyyy edge of the screen;-; It works i promise</div>
+
+### Tab Navigator (Navigation Without Changing the Screen aka Staying in the Same Screen)
+#### Install
+- https://reactnavigation.org/docs/material-top-tab-navigator
+  ```
+  npm install @react-navigation/material-top-tabs react-native-tab-view
+  npm install react-native-pager-view
+  ```
+#### Usage
+```jsx
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {View, Text} from 'react-native';
+
+const ProfileTabs = createMaterialTopTabNavigator();
+
+const Tab1 = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is tab 1</Text>
+    </View>
+  );
+};
+
+const Tab2 = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is tab 2</Text>
+    </View>
+  );
+};
+
+const Tab3 = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is tab 3</Text>
+    </View>
+  );
+};
+
+export const ProfileTabsNavigation = () => {
+  return (
+    <ProfileTabs.Navigator>
+      <ProfileTabs.Screen name={'Tab1'} component={Tab1} />
+      <ProfileTabs.Screen name={'Tab2'} component={Tab2} />
+      <ProfileTabs.Screen name={'Tab3'} component={Tab3} />
+    </ProfileTabs.Navigator>
+  );
+};
+```
+```jsx
+  import {ProfileTabsNavigation} from '../../navigation/MainNavigation';
+    <View style={globalStyle.flex}>
+      <ProfileTabsNavigation />
+    </View>
+```
+*=> Now we have 3 tabs in the Profile screen with animation when we swipe left or right*
+![alt text](image-22.png) 
+
+![alt text](image-23.png)
+
