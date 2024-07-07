@@ -621,10 +621,12 @@ const style = StyleSheet.create({
 });
 ```
 <div style="color: orange;">⚠️Personal experience: Avoid using different font size on/off focus, it will cause the last letter to be cut off. Instead, use different color, font style, or padding</div>
+
 ```jsx
         tabBarLabel: ({focused}) => (
           <ProfileTabTitle isFocused={focused} title={'Photos'} />
         ),
+```
 ```jsx
 import ProfileTabTitle from '../components/ProfileTabTitle/ProfileTabTitle';
 
@@ -661,5 +663,10 @@ const Tab1 = () => {
     </ProfileTabs.Navigator>
   );
 ```
-*=> Thats how we can style the tab navigator with custom title and indicator. Animation with this is 🤌🤌🤌* 
+*=> Thats how we can style the tab navigator with custom title and indicator. Animation with this is 🤌🤌🤌*
 ![alt text](image-24.png)
+
+## Donation App
+```npx react-native init DonationApp```
+```cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\DonationApp" && npx react-native run-android```
+
