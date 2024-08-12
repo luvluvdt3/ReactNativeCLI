@@ -621,6 +621,7 @@ const style = StyleSheet.create({
 });
 ```
 <div style="color: orange;">⚠️Personal experience: Avoid using different font size on/off focus, it will cause the last letter to be cut off. Instead, use different color, font style, or padding</div>
+<div style="color: orange;">⚠️Also fontWeight doesnt work on windows=w= (Check out helper.js in Donation, its specifically made for Windows </div>
 
 ```jsx
         tabBarLabel: ({focused}) => (
@@ -669,4 +670,21 @@ const Tab1 = () => {
 ## Donation App
 ```npx react-native init DonationApp```
 ```cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\DonationApp" && npx react-native run-android```
+### Windows Custom Font 
+<div style="color: orange;">⚠️Windows doesnt support fontWeight, therefore we have to use custom font helper</div>
 
+```jsx
+export const getFontFamily = (baseFont='Inter', weight) => {
+    switch(weight) {
+        case '100':
+            return `${baseFont}-Thin`;
+            ...
+```
+```jsx
+import {getFontFamily} from './assets/fonts/helper';
+      <Text style={{fontSize: 70, fontFamily: getFontFamily('Inter', '800')}}>
+        Hello World!
+      </Text>
+```
+
+### Install (again) Navigation
