@@ -694,5 +694,39 @@ import {getFontFamily} from './assets/fonts/helper';
   <div style="color: orange;">⚠️If issue, can try</div>
   
   ```npm start -- --reset-cache```
-  
+
+### defaultProps Deprecated
+<div style="color: orange;">⚠️There would be warning if using defaultProps, use default value in the function instead</div>
+
+- Before
+```jsx
+const Button = props => {
+  return (
+    <Pressable
+      disabled={props.isDisabled}
+      onPress={() => props.onPress()}>
+      ...
+    </Pressable>
+  );
+};
+
+Button.defaultProps = {
+  isDisabled: false,
+  onPress: () => {},
+};
+```
+
+- After
+  ```jsx
+    const Button = ({title = '', isDisabled = false, onPress = () => {}})=> {
+      return (
+        <Pressable
+          disabled={isDisabled}
+          onPress={onPress}>
+          ...
+        </Pressable>
+      );
+    };
+  ```
+Much cleaner and no warning anymore :v
   
