@@ -687,4 +687,12 @@ import {getFontFamily} from './assets/fonts/helper';
       </Text>
 ```
 
-### Install (again) Navigation
+### Install (again) Navigation 
+- Same stuff as `## Basic Navigation` && `### Stack Navigator`
+  <div style="color: orange;">⚠️Ah remember: If on IOS, dont forget pod install to install the dependencies</div>
+  Then close the app and re-run it
+  <div style="color: orange;">⚠️If issue, can try</div>
+  
+  ```npm start -- --reset-cache```
+  
+  
