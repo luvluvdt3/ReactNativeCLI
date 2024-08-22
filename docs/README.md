@@ -699,22 +699,22 @@ import {getFontFamily} from './assets/fonts/helper';
 <div style="color: orange;">⚠️There would be warning if using defaultProps, use default value in the function instead</div>
 
 - Before
-```jsx
-const Button = props => {
-  return (
-    <Pressable
-      disabled={props.isDisabled}
-      onPress={() => props.onPress()}>
-      ...
-    </Pressable>
-  );
-};
+  ```jsx
+  const Button = props => {
+    return (
+      <Pressable
+        disabled={props.isDisabled}
+        onPress={() => props.onPress()}>
+        ...
+      </Pressable>
+    );
+  };
 
-Button.defaultProps = {
-  isDisabled: false,
-  onPress: () => {},
-};
-```
+  Button.defaultProps = {
+    isDisabled: false,
+    onPress: () => {},
+  };
+  ```
 
 - After
   ```jsx
