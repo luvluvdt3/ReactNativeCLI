@@ -730,3 +730,22 @@ import {getFontFamily} from './assets/fonts/helper';
   ```
 Much cleaner and no warning anymore :v
   
+### Redux && Redux Toolkit
+- Redux is a state management library, whose main purpose is to manage the state of the application in a predictable way.
+  - Advantages:
+    - Centralized state management
+    - Predictable state management
+    - Easy debugging
+    - Easy testing
+  - Disadvantages:
+    - Boilerplate code (meaning a lot of code to write)
+    - Complexity
+    - Performance issues (since it's centralized, it can be slow)
+- Redux Toolkit is a package that helps to reduce the boilerplate code and complexity of Redux. It provides a set of tools and best practices to write Redux code in a more efficient way.
+#### Install
+- https://redux.js.org/introduction/installation
+  ```
+  npm install @reduxjs/toolkit
+  npm install react-redux
+  npm install redux
+  ```
