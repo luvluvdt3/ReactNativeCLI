@@ -798,23 +798,71 @@ Much cleaner and no warning anymore :v
 
 - In User.js:
   ```jsx
-    ...
-    export default User.reducer;
+  ...
+  export default User.reducer;
   ```
 - In store.js:
   ```jsx
-    // Importing the combineReducers function from Redux
-    import {combineReducers} from 'redux';
+  // Importing the combineReducers function from Redux
+  import {combineReducers} from 'redux';
 
-    // Importing the User reducer from the ./reducers/User file
-    import User from './reducers/User';
+  // Importing the configureStore function from the Redux Toolkit
+  import {configureStore} from '@reduxjs/toolkit';
 
-    // Creating a rootReducer that combines all reducers in the app
-    const rootReducer = combineReducers({
-      // Here, we're combining the User reducer and calling it "user"
-      user: User,
-    });
+  // Importing the User reducer from the ./reducers/User file
+  import User from './reducers/User';
 
-    // Exporting the rootReducer to be used in the store
-    export default rootReducer;
+  // Creating a rootReducer that combines all reducers in the app
+
+  const rootReducer = combineReducers({
+    // Here, we're combining the User reducer and calling it "user"
+    user: User,
+  });
+
+  // Creating a new Redux store using the configureStore function
+  // We're passing in the rootReducer as the main reducer for the store
+  const store = configureStore({
+    reducer: rootReducer,
+  });
+
+  // Exporting the store to be used in the app
+  export default store;
   ```
+- In App.js:
+  ```jsx
+  // Importing the Provider component from the React Redux library
+  // The Provider component is a higher-order component that provides the Redux store to all components in the app
+  import {Provider} from 'react-redux';
+  import store from './redux/store';
+
+  const App = () => {
+    // Rendering the App component with a Provider and NavigationContainer component
+    // We're passing in the store prop to the Provider component, making the store available to all child components
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <MainNavigation />
+        </NavigationContainer>
+      </Provider>
+    );
+  ```
+- In Home.js:
+  ```jsx
+  // Importing the useSelector hook from the React Redux library
+  // This hook allows us to select and retrieve data from the store
+  import {useSelector} from 'react-redux';
+
+  const Home = () => {
+    // Using the useSelector hook to select the "user" slice of the store
+    // This will return the user object containing firstName, lastName and userId fields
+    const user = useSelector(state => state.user);
+    console.log(user);
+    return (
+      <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
+        <Header title={user.firstName + ' ' + user.lastName} />
+      </SafeAreaView>
+    );
+  };
+  ```
+  -> Now we can access the user state in the Home screen
+    ![alt text](image-25.png)
