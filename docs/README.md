@@ -749,3 +749,72 @@ Much cleaner and no warning anymore :v
   npm install react-redux
   npm install redux
   ```
+
+### Redux Toolkit Slice
+- A slice is a self-contained piece of state and logic for managing that state.
+- Slice is a part of the overall state of your application that you want to manage in a modular way.
+- Ex in Donation App:
+  - User slice keeping information about user (ID, name, email, etc)
+  - Categories information for donations
+  - Single Donation Information Slice
+-> Improve code structure, readability, and maintainability
+
+- Example of User slice:
+```jsx
+  // Importing the createSlice function from the Redux Toolkit
+  import {createSlice} from '@reduxjs/toolkit';
+
+  // Defining the initial state for the user slice of the store
+  const initialState = {
+    firstName: 'Tu',
+    lastName: 'Penguin',
+    userId: 1,
+  };
+
+  // Creating a new slice of the store named "user" with its own set of reducers
+  export const User = createSlice({
+    name: 'user',
+    initialState: initialState,
+    reducers: {
+      // Defining the "updateFirstName" reducer function
+      // It takes the current state and an action object as parameters
+      // It updates the firstName field of the state with the payload value of the action
+      updateFirstName: (state, action) => {
+        state.firstName = action.payload.firstName;
+      },
+    },
+  });
+
+  // Exporting the reducers here from the "User" slice
+  // makes them available to other parts of the app that want to use it
+  export const {updateFirstName} = User.actions;
+  export default User;
+```
+
+### Combine Reducers
+- A Reducer is a function that updates the state of the application in response to an action.
+- As the app grows, you may find yourself with many different reducers, each managing its own part of the state.
+-> Combine reducers is useful cuz it improves code organization and makes it easier to manage the state of the app.
+
+- In User.js:
+  ```jsx
+    ...
+    export default User.reducer;
+  ```
+- In store.js:
+  ```jsx
+    // Importing the combineReducers function from Redux
+    import {combineReducers} from 'redux';
+
+    // Importing the User reducer from the ./reducers/User file
+    import User from './reducers/User';
+
+    // Creating a rootReducer that combines all reducers in the app
+    const rootReducer = combineReducers({
+      // Here, we're combining the User reducer and calling it "user"
+      user: User,
+    });
+
+    // Exporting the rootReducer to be used in the store
+    export default rootReducer;
+  ```
