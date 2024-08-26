@@ -908,3 +908,74 @@ const Home = () => {
   ```
 -> Onclick the button, the console will log the state changes
 ![alt text](image-28.png)
+
+### Persisting Store
+*With Redux Persist, we can persist the Redux store to the device's storage, so that the state is saved even if the app is closed or the device is restarted.*
+*Ex: Earlier we changed the first name to 'Potato', but if we 'R' or close the app and re-open it, the first name will be back to 'Tu'*
+
+- Install
+  ```
+  npm install redux-persist
+  npm install @react-native-async-storage/async-storage
+  ```
+  Then close everything and re-run the app
+  ```
+  npm start --reset-cache
+  cd "C:\Users\luvluvdt3\Desktop\ReactNativeCLI\DonationApp" && npx react-native run-android
+  ```
+- In store.js:
+  ```jsx
+  import AsyncStorage from '@react-native-async-storage/async-storage';
+  import {persistReducer, persistStore} from 'redux-persist';
+  import {combineReducers, configureStore} from '@reduxjs/toolkit'; //from redux-toolkit instead of redux ->  not using the same config as above
+
+  ...
+  // Configuring the redux-persist library to persist the root reducer with AsyncStorage
+  const configuration = {
+    key: 'root',
+    storage: AsyncStorage,
+    version: 1,
+  };
+
+  // Creating a new persisted reducer with the configuration and root reducer
+  const persistedReducer = persistReducer(configuration, rootReducer);
+
+  // Creating a new Redux store using the configureStore function
+  // We're passing in the persisted reducer as the main reducer for the store
+  const store = configureStore({
+    reducer: persistedReducer,
+
+    // Using the getDefaultMiddleware function from the Redux Toolkit to add default middleware to the store
+    // We're passing in an object with the serializableCheck key set to false to avoid serialization errors with non-serializable data
+    middleware: getDefaultMiddleware => {
+      return getDefaultMiddleware({
+        serializableCheck: false,
+      });
+    },
+  });
+
+  // Exporting the store to be used in the app
+  // Also exporting the persistor object created with the persistStore function from redux-persist
+  export default store;
+  export const persistor = persistStore(store);
+  ```
+
+- In App.js:
+  ```jsx
+  import {PersistGate} from 'redux-persist/integration/react';
+  import {persistor} from './redux/store';
+
+  ...
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <NavigationContainer>
+          <MainNavigation />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
+  );
+  ```
+-> Now the state will be saved even if we close the app and re-open it
+![alt text](image-29.png) ![alt text](image-30.png) ![alt text](image-31.png)
+Magic 🪄🪄🪄
