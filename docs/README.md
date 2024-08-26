@@ -866,3 +866,30 @@ Much cleaner and no warning anymore :v
   ```
   -> Now we can access the user state in the Home screen
     ![alt text](image-25.png)
+
+### Dispatch Actions in Redux
+```jsx
+import {useDispatch, useSelector} from 'react-redux';
+
+import {updateFirstName} from '../../redux/reducers/User';
+const Home = () => {
+  const user = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
+
+  console.log(user);
+
+  return (
+    <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
+      <Header title={user.firstName + ' ' + user.lastName} />
+      {/* onClick dispatch turning firstName to 'Potato' */}
+      <Pressable onPress={() => dispatch(updateFirstName({firstName: 'Potato'}))}>
+        <Text>Press me to change first name</Text>
+      </Pressable>
+    </SafeAreaView>
+  );
+};
+```
+->onClick dispatch turning firstName to 'Potato' lol
+![alt text](image-26.png) ![alt text](image-27.png)
+
