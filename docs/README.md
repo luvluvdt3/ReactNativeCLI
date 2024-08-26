@@ -893,3 +893,18 @@ const Home = () => {
 ->onClick dispatch turning firstName to 'Potato' lol
 ![alt text](image-26.png) ![alt text](image-27.png)
 
+### Redux Logger
+```npm install redux-logger```
+- In store.js:
+  ```jsx
+  import logger from 'redux-logger';
+
+  const store = configureStore({
+    ...
+    middleware: getDefaultMiddleware => {
+    return getDefaultMiddleware().concat(logger);
+    },
+  });
+  ```
+-> Onclick the button, the console will log the state changes
+![alt text](image-28.png)
