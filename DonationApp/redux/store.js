@@ -1,6 +1,6 @@
 // Importing the User reducer from the ./reducers/User file
 import User from './reducers/User';
-
+import Categories from './reducers/Categories';
 import {logger} from 'redux-logger';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,6 +11,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';//from redux-to
 const rootReducer = combineReducers({
   // Here, we're combining the User reducer and calling it "user"
   user: User,
+  categories: Categories,
 });
 
 // Configuring the redux-persist library to persist the root reducer with AsyncStorage
