@@ -18,11 +18,13 @@ import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
+import {resetToInitialState} from '../../redux/reducers/User';
 
 const Home = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
+  //dispatch(resetToInitialState());
   return (
     <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
       <ScrollView showsVerticalScrollIndicator={false}>

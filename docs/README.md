@@ -979,3 +979,22 @@ const Home = () => {
 -> Now the state will be saved even if we close the app and re-open it
 ![alt text](image-29.png) ![alt text](image-30.png) ![alt text](image-31.png)
 Magic 🪄🪄🪄
+
+### Reset Redux Initial State
+When we change smth in object's initial state and wanna reset it back:
+- In User.js:
+  ```jsx
+  const initialState = {
+    ...
+  profileImage: 'https://avatars.githubusercontent.com/u/77581509?v=4',
+  };
+  export const {resetToInitialState, updateFirstName} = User.actions;
+  ```
+- In Home.js:
+  ```jsx
+  import {resetToInitialState} from '../../redux/reducers/User';
+  const Home = () => {
+    ...
+    dispatch(resetToInitialState());
+  ```
+-> Now the profile image will be back to the initial state, and we should dispatch it only once though lol :v
