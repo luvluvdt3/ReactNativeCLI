@@ -24,6 +24,7 @@ const Home = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
+  const donations = useSelector(state => state.donations);
   //dispatch(resetToInitialState());
   const [categoryPage, setCategoryPage] = useState(1);
   const [categoryList, setCategoryList] = useState([]);
@@ -79,7 +80,7 @@ const Home = () => {
           <Header title={'Select Category'} type={2} />
         </View>
         <View style={style.categories}>
-        <FlatList
+          <FlatList
             onEndReachedThreshold={0.5}
             onEndReached={() => {
               if (isLoadingCategories) {
