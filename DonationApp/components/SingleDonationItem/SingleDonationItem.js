@@ -24,7 +24,12 @@ const SingleDonationItem = ({onPress = () => {}, donationItemId, uri, badgeTitle
         />
       </View>
       <View style={style.donationInformation}>
-        <Header title={donationTitle} type={3} color={'#0A043C'} />
+      <Header
+          title={donationTitle}
+          type={3}
+          color={'#0A043C'}
+          numberOfLines={1}
+        />
         <View style={style.price}>
           <Header
             title={'$' + price.toFixed(2)}

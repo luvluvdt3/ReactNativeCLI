@@ -998,3 +998,7 @@ When we change smth in object's initial state and wanna reset it back:
     dispatch(resetToInitialState());
   ```
 -> Now the profile image will be back to the initial state, and we should dispatch it only once though lol :v
+
+### Categories of Donations Items
+-> Create Redux Slice for Categories and Donation Items
+![alt text](image-32.png)
