@@ -15,7 +15,7 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/Search/Search';
 import Tab from '../../components/Tab/Tab';
 import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
-
+import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
@@ -39,7 +39,7 @@ const Home = () => {
     const items = donations.items.filter(value =>
       value.categoryIds.includes(categories.selectedCategoryId),
     );
-    setDonationItems(items);
+    setDonationItems(items); //Filtering the items based on the selected category
   }, [categories.selectedCategoryId]);
 
   useEffect(() => {
@@ -128,6 +128,25 @@ const Home = () => {
             )}
           />
         </View>
+        {donationItems.length > 0 && (
+          <View style={style.donationItemsContainer}>
+            {donationItems.map(value => (
+              <SingleDonationItem
+                onPress={selectedDonationId => {}}
+                donationItemId={value.donationItemId}
+                uri={value.image}
+                donationTitle={value.name}
+                badgeTitle={
+                  categories.categories.filter(
+                    val => val.categoryId === categories.selectedCategoryId,
+                  )[0].name
+                }
+                key={value.donationItemId}
+                price={parseFloat(value.price)}
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
