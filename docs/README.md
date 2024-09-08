@@ -1002,3 +1002,41 @@ When we change smth in object's initial state and wanna reset it back:
 ### Categories of Donations Items
 -> Create Redux Slice for Categories and Donation Items
 ![alt text](image-32.png)
+
+### Firebase Setup
+#### Install
+  - https://rnfirebase.io/
+  - Step 1: Create a Firebase project
+  - Step 2: `npm install --save @react-native-firebase/app`
+  - Step 3: In android/app/build.gradle, copy `applicationId`
+    In this case: 
+    `jsx
+      defaultConfig {
+        applicationId "com.donationapp"
+    `
+    -> Copy `com.donationapp` 
+  - Step 4, go to Firebase Console like `https://console.firebase.google.com/u/0/project/donationapp-XXXX/overview` and click on Android icon
+    ![alt text](image-33.png)
+  - Step 5, paste the `com.donationapp` to the form
+    ![alt text](image-34.png)
+  - Step 6, download the `google-services.json` and put it in `android/app/`
+    ![alt text](image-35.png)
+  - Step 7, skip `Step 3 of Firebase form`
+    ![alt text](image-36.png)
+  - Step 8, go back to the Firebase Console
+    ![alt text](image-37.png)
+  - Step 9 `cd android && gradlew signingReport`
+  - Step 10: Add into `android/build.gradle`
+    ```jsx
+    buildscript {
+    ...
+    dependencies {
+        ...
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+    ```
+  - Step 11: Add into `android/app/build.gradle`
+    ```jsx
+    apply plugin: 'com.google.gms.google-services'
+    ```
+<div style="color: orange;">⚠️If is on IOS, there are few extra steps still after thi</div>
