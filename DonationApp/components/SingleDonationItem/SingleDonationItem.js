@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 
 import style from './style';
 
-const SingleDonationItem = ({onPress = () => {}, donationItemId, uri, badgeTitle, donationTitle, price}) => {
+const SingleDonationItem = ({onPress=()=>{}, donationItemId, uri, badgeTitle, donationTitle, price}) => {
   return (
     <Pressable
       onPress={() => {
@@ -24,7 +24,7 @@ const SingleDonationItem = ({onPress = () => {}, donationItemId, uri, badgeTitle
         />
       </View>
       <View style={style.donationInformation}>
-      <Header
+        <Header
           title={donationTitle}
           type={3}
           color={'#0A043C'}
