@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import style from './style';
 import {horizontalScale} from '../../assets/styles/scaling';
-const Tab = ({isInactive=false, onPress=()=>{}, title=''}) => {
+const Tab = ({isInactive=false, onPress=()=>{}, title='', tabId=0}) => {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
   const paddingHorizontal = 33;
