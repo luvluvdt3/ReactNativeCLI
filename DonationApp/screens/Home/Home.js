@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
-
+import {Routes} from '../../navigation/Routes';
 import Header from '../../components/Header/Header';
 import Search from '../../components/Search/Search';
 import Tab from '../../components/Tab/Tab';
@@ -19,8 +19,9 @@ import SingleDonationItem from '../../components/SingleDonationItem/SingleDonati
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
+import {updateSelectedDonationId} from '../../redux/reducers/Donations';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
@@ -133,7 +134,10 @@ const Home = () => {
             {donationItems.map(value => (
               <View key={value.donationItemId} style={style.singleDonationItem}>
                 <SingleDonationItem
-                  onPress={selectedDonationId => {}}
+                  onPress={selectedDonationId => {
+                    dispatch(updateSelectedDonationId(selectedDonationId));
+                    navigation.navigate(Routes.SingleDonationItem);
+                  }}
                   donationItemId={value.donationItemId}
                   uri={value.image}
                   donationTitle={value.name}
