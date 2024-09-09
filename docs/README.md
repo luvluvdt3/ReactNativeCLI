@@ -1053,3 +1053,41 @@ When we change smth in object's initial state and wanna reset it back:
     ![alt text](image-40.png)
   - Step 5: Enable it
     ![alt text](image-41.png)
+### Create User on Firebase
+- Create `api/user.js`:
+  ```jsx
+  import auth from '@react-native-firebase/auth';
+
+  export const createUser = async (fullName, email, password) => {
+    try {
+      const user = await auth().createUserWithEmailAndPassword(email, password);
+      await user.user.updateProfile({displayName: fullName});
+      console.log(user);
+      return user;
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      } else if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid');
+      }
+      console.log(error);
+    }
+  };
+  ```
+  - Calling that api method in `Register.js`:
+    ```jsx
+    import {createUser} from '../../api/user';
+    const Register = ({navigation}) => {
+      ...
+      <Button
+        title={'Registration'}
+        onPress={async () => await createUser(fullName, email, password)}
+      />
+    ```
+  - Now we can create a user on Firebase:
+  ![alt text](image-42.png)
+  ![alt text](image-43.png)
+  ![alt text](image-44.png)
+<div style="color: cornflowerblue;">Info: Firebase also verify errors like email already in use, invalid email, etc</div>
+
+![alt text](image-45.png)
