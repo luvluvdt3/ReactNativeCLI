@@ -1091,3 +1091,45 @@ When we change smth in object's initial state and wanna reset it back:
 <div style="color: cornflowerblue;">Info: Firebase also verify errors like email already in use, invalid email, etc</div>
 
 ![alt text](image-45.png)
+
+### Error && Success Handling in Firebase
+- In `api/user.js`:
+  ```jsx
+    catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        return {error: 'The email you entered is already in use.'};
+      } else if (error.code === 'auth/invalid-email') {
+        return {error: 'Please enter a valid email address.'};
+      }
+      return {error: 'Something went wrong with your request.'};
+    }
+  ```
+  - In `Register.js`:
+    ```jsx
+      const [success, setSuccess] = useState('');
+      const [error, setError] = useState('');
+      ...
+      {error.length > 0 && <Text style={style.error}>{error}</Text>}
+      {success.length > 0 && <Text style={style.success}>{success}</Text>}
+      ...
+      <Button
+      isDisabled={
+        fullName.length <= 2 || email.length <= 5 || password.length < 8
+      } //if any of the fields are empty or password is less than 8 characters, the button will be disabled
+      title={'Registration'}
+      onPress={async () => {
+        let user = await createUser(fullName, email, password);
+        if (user.error) {
+          setError(user.error); //if there is an error, set the error state with the error message
+        } else {
+          setError('');
+          setSuccess('You have successfully registered');
+          setTimeout(() => navigation.goBack(), 3000);
+        }//if there is no error, set the success state with the success message and navigate back to the previous screen after 3 seconds
+      }}
+    ```
+
+<div style="color: cornflowerblue;">-> If error then show error message, if success then show success message and navigate to the Home screen</div>
+
+![alt text](image-46.png)
+![alt text](image-47.png)
