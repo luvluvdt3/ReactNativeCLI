@@ -1040,3 +1040,16 @@ When we change smth in object's initial state and wanna reset it back:
     apply plugin: 'com.google.gms.google-services'
     ```
 <div style="color: orange;">⚠️If is on IOS, there are few extra steps still after thi</div>
+
+### Firebase Auth Setup
+#### Install
+  - https://rnfirebase.io/auth/usage
+  - Step 1: `npm install @react-native-firebase/auth --save`
+  - Step 2: Go back to Firebase Console and click on `Authentication`
+    ![alt text](image-38.png)
+  - Step 3: Click on `Get Started`
+    ![alt text](image-39.png)
+  - Step 4: Click on `Email/Password`
+    ![alt text](image-40.png)
+  - Step 5: Enable it
+    ![alt text](image-41.png)
