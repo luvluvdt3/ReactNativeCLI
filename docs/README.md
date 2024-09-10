@@ -1286,3 +1286,39 @@ When we change smth in object's initial state and wanna reset it back:
   ![alt text](image-49.png)
   ![alt text](image-50.png)
   ![alt text](image-51.png)
+
+### Upgrading Environment with Nodemon and Babbel
+- Nodemon:
+  *Nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.*
+  ```npm install -g nodemon```
+  <div style="color: orange;">⚠️WINDOWS: Might have issues with command. Solution: open Powershell as admin and run <i>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</i> and then run the command again</div>
+  <div style="color: orange;">⚠️If still error then run <i>npm install nodemon</i> in the same directory with modifying <i>package.json</i></div>
+
+    ```jsx
+    "scripts": {
+      "server": "nodemon server.js"
+    }
+    ```
+  <div style="color: cornflowerblue;">Can now run the server with <i>npm run server</i></div>
+
+  ![alt text](image-52.png)
+
+- Babbel:
+  *Babel is a JavaScript compiler that allows developers to write code using the latest version of JavaScript and convert it into a version that can run in any browser or environment.*
+  ```npm install --save-dev @babel/node @babel/preset-env @babel/runtime @babel/plugin-transform-runtime```
+  - Create `.babelrc`:
+    ```jsx
+    {
+      "presets": ["@babel/preset-env"],
+      "plugins": ["@babel/plugin-transform-runtime"]
+    }
+    ```
+  - Modify `package.json`:
+    ```jsx
+    "type":"module",
+    ```
+  - In `server.js`:
+    ```jsx
+    //const express = require('express'); //no longer this way
+    import express from 'express';
+    ```
