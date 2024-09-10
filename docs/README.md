@@ -1088,7 +1088,7 @@ When we change smth in object's initial state and wanna reset it back:
   ![alt text](image-42.png)
   ![alt text](image-43.png)
   ![alt text](image-44.png)
-<div style="color: cornflowerblue;">Info: Firebase also verify errors like email already in use, invalid email, etc</div>
+<div style="color: cornflowerblue;"><b>Info:</b> Firebase also verify errors like email already in use, invalid email, etc</div>
 
 ![alt text](image-45.png)
 
