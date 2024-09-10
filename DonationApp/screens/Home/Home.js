@@ -19,6 +19,7 @@ import SingleDonationItem from '../../components/SingleDonationItem/SingleDonati
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
+import {logOut} from '../../api/user';
 import {updateSelectedDonationId} from '../../redux/reducers/Donations';
 
 const Home = ({navigation}) => {
@@ -26,8 +27,6 @@ const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
   const donations = useSelector(state => state.donations);
-
-  //dispatch(resetToInitialState());
 
   const [donationItems, setDonationItems] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
@@ -72,11 +71,21 @@ const Home = ({navigation}) => {
               <Header title={user.displayName + ' 👋'} />
             </View>
           </View>
-          <Image
-            source={{uri: user.profileImage}}
-            style={style.profileImage}
-            resizeMode={'contain'}
-          />
+          <View>
+            <Image
+              source={{uri: user.profileImage}}
+              style={style.profileImage}
+              resizeMode={'contain'}
+            />
+            <Pressable
+              onPress={async () => {
+                console.log('User is logging out');
+                dispatch(resetToInitialState());
+                await logOut();
+              }}>
+              <Header type={2} title={'Logout'} color={'#156CF7'} />
+            </Pressable>
+          </View>
         </View>
         <View style={style.searchBox}>
           <Search />

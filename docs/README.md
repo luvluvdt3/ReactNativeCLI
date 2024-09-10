@@ -1185,3 +1185,27 @@ When we change smth in object's initial state and wanna reset it back:
     </Provider>
   );
   ```
+### Log out User
+- In `api/user.js`:
+  ```jsx
+  export const logOut = async () => {
+    await auth().signOut();
+  };
+  ```
+- In `screens/Home/Home.js`:
+  ```jsx
+  import {logOut} from '../../api/user';
+  const Home = ({navigation}) => {
+    ...
+  <Pressable
+    onPress={async () => {
+      console.log('User is logging out');
+      dispatch(resetToInitialState());
+      await logOut();
+    }}>
+    <Header type={2} title={'Logout'} color={'#156CF7'} />
+  </Pressable>
+  ```
+<div style="color: cornflowerblue;">-> Now we can log out the user and reset the state back to the initial state</div>
+
+![alt text](image-48.png)
