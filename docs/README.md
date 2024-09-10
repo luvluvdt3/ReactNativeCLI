@@ -1356,3 +1356,23 @@ When we change smth in object's initial state and wanna reset it back:
       res.send("We updated a user with firstname of "+req.body.firstName);
   })
   ```
+
+### Firebase Cloud
+*Firebase Cloud Messaging (FCM)'s role is to deliver notifications and messages to users across platforms.*
+
+```npm install -g firebase-tools```
+```firebase login```
+```firebase init```
+![alt text](image-53.png)
+![alt text](image-54.png)
+
+(I'm shocked, `tuThePenguin` is already taken ;^;)
+![alt text](image-55.png)
+![alt text](image-56.png)
+![alt text](image-57.png)
+
+<div style="color: cornflowerblue;">-> The Firebase Cloud is now set up</div>
+
+![alt text](image-58.png)
+![alt text](image-59.png)
+![alt text](image-60.png)
