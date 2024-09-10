@@ -1,9 +1,10 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.20.0",
     "nodemon": "^3.1.4"
   },
-  "type":"module",
+  "type": "module",
   "scripts": {
     "server": "nodemon server.js"
   },
