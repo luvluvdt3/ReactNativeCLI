@@ -1257,3 +1257,32 @@ When we change smth in object's initial state and wanna reset it back:
         console.log('Application has rendered');
       }, []);
   ```
+### Server, NodeJS & Express
+```npm install express```
+- Create `server.js`:
+  ```jsx
+  const express = require('express');
+
+  const app = express();
+
+  app.get('/', (req, res) => {
+      res.send('Hello World!');
+      }
+  );
+
+  app.get('/potato', (req, res) => {
+      res.send('Hello Potato!');
+      }
+  );
+
+  const PORT = 3000;
+  app.listen(PORT, () => {
+      console.log('Server is running on port ' + PORT);
+      }
+  );
+  ```
+- Run the server:
+  ```node server.js```
+  ![alt text](image-49.png)
+  ![alt text](image-50.png)
+  ![alt text](image-51.png)
