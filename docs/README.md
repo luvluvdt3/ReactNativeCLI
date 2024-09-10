@@ -1209,3 +1209,51 @@ When we change smth in object's initial state and wanna reset it back:
 <div style="color: cornflowerblue;">-> Now we can log out the user and reset the state back to the initial state</div>
 
 ![alt text](image-48.png)
+
+### Token Expiration using Firebase && AppState
+*Token expires every hour, meaning that it's no longer valid for authenticating the user. If the user continues to use the app without logging out, the app will continue to treat the user as authenticated even though their token is no longer valid. And this is very bad because it can lead to very severe security and privacy issues. And additionally, if the user's data is being store on the server, the server may continue to accept the request or server might deny the request. And if we don't log out the user because their tokens are expired, then they're going to be getting bunch of errors.*
+<div style="color: cornflowerblue;">-> So what we want to do is make sure that whenever token expires we'll look the user out or we get a refresh token. We want to be getting a refresh token and there's a way to do that using Firebase and we are going to be doing that. </div>
+<div style="color: cornflowerblue;">-> We will check the token expiration before making a server request, which is a good practice because we could get a new token if the current one has expired when we're making any server calls.
+</div>
+<div style="color: cornflowerblue;"><b>Solution-> AppState:</b>  used to track whether the user is running the application in the foreground or in the background. And we can use it to make sure that whenever user comes back from the background or inactive node to the active mode of the app state, then we check the token and make sure that if it needs to be refreshed, we refresh it. </div>
+
+- In `api/user.js`:
+  ```jsx
+  export const checkToken = async () => {
+    try {
+      let response = await auth().currentUser.getIdToken(true);
+      console.log('We are updating token for you');
+      store.dispatch(updateToken(response));
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
+  ```
+- In `redux/reducers/User.js`:
+  ```jsx
+    updateToken: (state, action) => {
+      state.token = action.payload;
+    },
+  ```
+- In `App.js`:
+  ```jsx
+  import {AppState} from 'react-native';
+  ...
+  const App = () => {
+    const appState = useRef(AppState.currentState);
+      useEffect(() => {
+        const subscription = AppState.addEventListener(
+          'change',
+          async nextAppState => {
+            if (appState.current.match(/inactive|background/) && nextAppState === 'active') {//we are coming from background to the foreground
+              console.log('You have come back into the app');
+              await checkToken();
+            }
+            appState.current = nextAppState;
+          },
+        );
+        checkToken();
+        console.log('Application has rendered');
+      }, []);
+  ```
