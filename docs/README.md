@@ -1133,3 +1133,55 @@ When we change smth in object's initial state and wanna reset it back:
 
 ![alt text](image-46.png)
 ![alt text](image-47.png)
+
+### Navigation Flows (Authenticated or Non-Authenticated)
+*Define which screen to show based on the user's authentication status*
+- Create `navigation/RootNavigation.js`:
+  ```jsx
+  const RootNavigation = () => {
+    const user = useSelector(state => state.user);
+    return user.isLoggedIn ? <Authenticated /> : <NonAuthenticated />;
+  };
+  ```
+- In `navigation/MainNavigation.js`:
+  ```jsx
+  //Will be used by RootNavigation if user is not logged in
+  export const NonAuthenticated = () => {
+    return (
+      <Stack.Navigator
+        initialRouteName={Routes.Login}
+        screenOptions={{header: () => null, headerShown: false}}>
+        <Stack.Screen name={Routes.Login} component={Login} />
+        <Stack.Screen name={Routes.Registration} component={Registration} />
+      </Stack.Navigator>
+    );
+  };
+
+  //Will be used by RootNavigation if user is logged in
+  export const Authenticated = () => {
+    return (
+      <Stack.Navigator
+        initialRouteName={Routes.Home}
+        screenOptions={{header: () => null, headerShown: false}}>
+        <Stack.Screen name={Routes.Home} component={Home} />
+        <Stack.Screen
+          name={Routes.SingleDonationItem}
+          component={SingleDonationItem}
+        />
+      </Stack.Navigator>
+    );
+  };
+  ```
+- In `App.js`:
+  ```jsx
+  import RootNavigation from './navigation/RootNavigation';
+    return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <NavigationContainer>
+        <RootNavigation /> //instead of MainNavigation like before
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
+  );
+  ```
