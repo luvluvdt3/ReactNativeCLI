@@ -1376,3 +1376,32 @@ When we change smth in object's initial state and wanna reset it back:
 ![alt text](image-58.png)
 ![alt text](image-59.png)
 ![alt text](image-60.png)
+
+### Transfer Local Settings to Firebase Cloud Functions
+ *We can see that the engine node of the Firebase Cloud Functions is 18 (see in the `package.json`), while our node -v is 20 so we need to change the node version using nvm*
+
+- Download exe then install https://github.com/coreybutler/nvm-windows/releases/tag/1.1.12 (idk why but installing the offical guide with curl doens't work for me)
+
+``` nvm install 18``` 
+
+<div style="color: cornflowerblue;"><b>Info:</b> If you have multiple node versions, you can switch between them using `nvm use 20` or `nvm use 18`</div>
+
+*In this case, we need to use node 18 for Firebase Cloud Functions*
+```nvm use 18```
+
+Same thing install Babel and Nodemon in the Firebase Cloud Functions
+ 
+Then in `.babelrc`:
+```jsx
+{
+    "presets": [["@babel/preset-env", {
+        "targets": {
+        "node": "18"
+        }
+    }]],
+    "plugins": ["@babel/plugin-transform-runtime"]
+}
+```
+
+To deploy run `firebase deploy --only functions` or `npm run deploy` if you have it in `package.json`
+Work the same way as the local server but now in the cloud. (I wont be testing it since it requires payment)
